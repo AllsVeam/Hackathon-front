@@ -1,28 +1,45 @@
-# Angular specific
-/dist/
-/out-tsc/
-/tmp/
-/coverage/
-/e2e/test-output/
-/.angular/
-.angular/
+# Miscellaneous
+*.class
+*.log
+*.pyc
+*.swp
+.DS_Store
+.atom/
+.build/
+.buildlog/
+.history
+.svn/
+.swiftpm/
+migrate_working_dir/
 
-# Node modules and dependency files
-/node_modules/
-/package-lock.json
-/yarn.lock
+# IntelliJ related
+*.iml
+*.ipr
+*.iws
+.idea/
 
-# Environment files
-/.env
+# The .vscode folder contains launch configuration and tasks you configure in
+# VS Code which you may wish to be included in version control, so this line
+# is commented out by default.
+#.vscode/
 
-# Angular CLI and build artefacts
-/.angular-cli.json
-/.ng/
+# Flutter/Dart/Pub related
+**/doc/api/
+**/ios/Flutter/.last_build_id
+.dart_tool/
+.flutter-plugins
+.flutter-plugins-dependencies
+.pub-cache/
+.pub/
+/build/
 
-# TypeScript cache
-*.tsbuildinfo
+# Symbolication related
+app.*.symbols
 
-# Logs
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
+# Obfuscation related
+app.*.map.json
+
+# Android Studio will place build artifacts here
+/android/app/debug
+/android/app/profile
+/android/app/release
