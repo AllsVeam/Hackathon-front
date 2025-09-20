@@ -1,4 +1,7 @@
 import 'package:alquiler_app/l10n/app_localizations.dart';
+import 'package:alquiler_app/presentation/screens/home/accounts_screen.dart';
+import 'package:alquiler_app/presentation/screens/home/request_money_screen.dart';
+import 'package:alquiler_app/presentation/screens/home/send_money_screen.dart';
 import 'package:alquiler_app/presentation/screens/transactions/transactions_screen.dart';
 import 'package:alquiler_app/presentation/widgets/icon_bottom_action.dart';
 import 'package:flutter/material.dart';
@@ -25,7 +28,7 @@ class QuickActionsWidget extends StatelessWidget {
           ),
           SizedBox(height: 10),
           _QuickActionsBuild(),
-          _RecentTransaction(),
+          //_RecentTransaction(),
         ],
       ),
     );
@@ -48,12 +51,9 @@ class _QuickActionsBuild extends StatelessWidget {
           Colors.purpleAccent,
           onPressed: () {
             Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) =>
-                    ActionScreen(actionScreenTitle: loc.home_accounts),
-              ),
-            );
+                  context,
+                  MaterialPageRoute(builder: (context) => AccountsScreen()),
+                );
           },
         ),
         iconBottomAction(
@@ -63,11 +63,9 @@ class _QuickActionsBuild extends StatelessWidget {
           Colors.blue,
           onPressed: () {
             Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => ActionScreen(actionScreenTitle: loc.send),
-              ),
-            );
+                  context,
+                  MaterialPageRoute(builder: (context) => SendMoneyScreen()),
+                );
           },
         ),
         iconBottomAction(
@@ -77,12 +75,9 @@ class _QuickActionsBuild extends StatelessWidget {
           Colors.green,
           onPressed: () {
             Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) =>
-                    ActionScreen(actionScreenTitle: loc.receive),
-              ),
-            );
+                  context,
+                  MaterialPageRoute(builder: (context) => RequestMoneyScreen()),
+                );
           },
         ),
       ],

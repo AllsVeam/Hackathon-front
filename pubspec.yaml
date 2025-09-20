@@ -31,6 +31,8 @@ dependencies:
   flutter:
     sdk: flutter
   carousel_slider: ^5.1.1
+  
+  intl: ^0.20.2
 
 
   flutter_gen: ^5.11.0
@@ -44,6 +46,8 @@ dependencies:
   cupertino_icons: ^1.0.8
   shared_preferences: ^2.5.3
   provider: ^6.1.5+1
+  flutter_selector: ^1.0.3
+  http: ^1.5.0
 
 dev_dependencies:
   flutter_test:
@@ -68,7 +72,7 @@ flutter_icons:
 # The following section is specific to Flutter packages.
 flutter:
   assets:
-    - assets/
+    - assets/images/
 
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in

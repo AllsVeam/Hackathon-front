@@ -1,5 +1,6 @@
 import 'package:alquiler_app/l10n/app_localizations.dart';
 import 'package:alquiler_app/presentation/screens/home/home_screen.dart';
+import 'package:alquiler_app/presentation/screens/home/properties_screen.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatelessWidget {
@@ -21,9 +22,9 @@ class _BottomNavigationBarAppState extends State<BottomNavigationBarApp> {
   int _selectedIndex = 0;
 
   static const List<Widget> _widgetOptions = <Widget>[
-    HomeScreen(),
+    PropertiesScreen(),
     _ViewExample(title: 'Vivienda'),
-    _ViewExample(title: 'Calculadora'),
+    HomeScreen(),
     _ViewExample(title: 'Profile'),
   ];
 

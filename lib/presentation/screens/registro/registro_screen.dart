@@ -1,10 +1,11 @@
 import 'package:alquiler_app/l10n/app_localizations.dart';
-import 'package:alquiler_app/presentation/screens/home_page/home_page.dart';
+
 import 'package:alquiler_app/presentation/screens/login_page/login_page.dart';
 import 'package:alquiler_app/presentation/screens/registro/dto/userRegist.dart';
 import 'package:alquiler_app/presentation/widgets/buttons.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:alquiler_app/presentation/screens/registro/lessor_lessee_screen.dart';
 
 class RegistroScreen extends StatefulWidget {
   const RegistroScreen({super.key});
@@ -116,7 +117,7 @@ class _RegistroScreenState extends State<RegistroScreen> {
       );
       Navigator.push(
         context,
-        MaterialPageRoute(builder: (context) => HomePage()),
+        MaterialPageRoute(builder: (context) =>  const LessorLesseeScreen()),
       );
     } else {
       print("Algunos campos no son válidos");
