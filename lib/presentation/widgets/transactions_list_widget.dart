@@ -1,161 +1,34 @@
 import 'package:alquiler_app/domain/entities/transaction.dart';
+import 'package:alquiler_app/presentation/providers/transaction_provider.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class TransactionsList extends StatelessWidget {
-  const TransactionsList({super.key});
+  final int? total;
+  const TransactionsList({super.key, this.total});
 
   @override
   Widget build(BuildContext context) {
-    List<Transaction> transactions = [
-      Transaction(
-        id: 1,
-        type: 'out',
-        name: 'Netflix',
-        concepto: 'Entertainment',
-        count: 280,
-        date: '01/04/25',
-        idUser: '1',
-      ),
-      Transaction(
-        id: 2,
-        type: 'out',
-        name: 'Netflix',
-        concepto: 'Entertainment',
-        count: 280,
-        date: '01/05/25',
-        idUser: '1',
-      ),
-      Transaction(
-        id: 3,
-        type: 'in',
-        name: 'Salary Payment',
-        concepto: 'Company Inc',
-        count: 15000,
-        date: '15/05/25',
-        idUser: '1',
-      ),
-      Transaction(
-        id: 4,
-        type: 'in',
-        name: 'Salary Payment',
-        concepto: 'Company Inc',
-        count: 15000,
-        date: '30/05/25',
-        idUser: '1',
-      ),
-      Transaction(
-        id: 1,
-        type: 'out',
-        name: 'Netflix',
-        concepto: 'Entertainment',
-        count: 280,
-        date: '01/04/25',
-        idUser: '1',
-      ),
-      Transaction(
-        id: 2,
-        type: 'out',
-        name: 'Netflix',
-        concepto: 'Entertainment',
-        count: 280,
-        date: '01/05/25',
-        idUser: '1',
-      ),
-      Transaction(
-        id: 3,
-        type: 'in',
-        name: 'Salary Payment',
-        concepto: 'Company Inc',
-        count: 15000,
-        date: '15/05/25',
-        idUser: '1',
-      ),
-      Transaction(
-        id: 4,
-        type: 'in',
-        name: 'Salary Payment',
-        concepto: 'Company Inc',
-        count: 15000,
-        date: '30/05/25',
-        idUser: '1',
-      ),
-      Transaction(
-        id: 1,
-        type: 'out',
-        name: 'Netflix',
-        concepto: 'Entertainment',
-        count: 280,
-        date: '01/04/25',
-        idUser: '1',
-      ),
-      Transaction(
-        id: 2,
-        type: 'out',
-        name: 'Netflix',
-        concepto: 'Entertainment',
-        count: 280,
-        date: '01/05/25',
-        idUser: '1',
-      ),
-      Transaction(
-        id: 3,
-        type: 'in',
-        name: 'Salary Payment',
-        concepto: 'Company Inc',
-        count: 15000,
-        date: '15/05/25',
-        idUser: '1',
-      ),
-      Transaction(
-        id: 4,
-        type: 'in',
-        name: 'Salary Payment',
-        concepto: 'Company Inc',
-        count: 15000,
-        date: '30/05/25',
-        idUser: '1',
-      ),
-      Transaction(
-        id: 1,
-        type: 'out',
-        name: 'Netflix',
-        concepto: 'Entertainment',
-        count: 280,
-        date: '01/04/25',
-        idUser: '1',
-      ),
-      Transaction(
-        id: 2,
-        type: 'out',
-        name: 'Netflix',
-        concepto: 'Entertainment',
-        count: 280,
-        date: '01/05/25',
-        idUser: '1',
-      ),
-      Transaction(
-        id: 3,
-        type: 'in',
-        name: 'Salary Payment',
-        concepto: 'Company Inc',
-        count: 15000,
-        date: '15/05/25',
-        idUser: '1',
-      ),
-      Transaction(
-        id: 4,
-        type: 'in',
-        name: 'Salary Payment',
-        concepto: 'Company Inc',
-        count: 15000,
-        date: '30/05/25',
-        idUser: '1',
-      ),
-    ];
+    final transactions = Provider.of<TransactionProvider>(context);
+
+    if (transactions.isLoading) {
+      return const Center(child: CircularProgressIndicator());
+    }
+
+    if (transactions.transfers.isEmpty) {
+      return const Center(child: Text("Sin transferencias"));
+    }
+
+    final length = total != null
+        ? (transactions.transfers.length > total!
+              ? total!
+              : transactions.transfers.length)
+        : transactions.transfers.length;
+
     return ListView.builder(
-      itemCount: transactions.length,
+      itemCount: length,
       itemBuilder: (context, index) {
-        final tx = transactions[index];
+        final tx = transactions.transfers[index];
         return _ListTrans(tx);
       },
     );
@@ -163,7 +36,7 @@ class TransactionsList extends StatelessWidget {
 }
 
 class _ListTrans extends StatelessWidget {
-  final Transaction tx;
+  final TransactionModel tx;
   const _ListTrans(this.tx);
 
   @override

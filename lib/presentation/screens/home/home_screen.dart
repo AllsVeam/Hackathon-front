@@ -117,7 +117,7 @@ class _HomeView extends StatelessWidget {
             TransactionsCardWidget(),
             //TotalBalanceWidget(),
             QuickActionsWidget(),
-            Expanded(child: TransactionsList()),
+            Expanded(child: TransactionsList(total: 10)),
           ],
         ),
       ),

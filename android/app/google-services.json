@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "154301754198",
+    "project_id": "app-hackatlon-8346a",
+    "storage_bucket": "app-hackatlon-8346a.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:154301754198:android:4095824ee43b9dddcc44f7",
+        "android_client_info": {
+          "package_name": "com.example.alquiler_app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAQAThVLiiFRO2HBNhuZilUqqiWIbY3mxM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

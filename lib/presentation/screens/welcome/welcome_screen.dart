@@ -1,5 +1,6 @@
 import 'package:alquiler_app/l10n/app_localizations.dart';
 import 'package:alquiler_app/presentation/providers/locale_provider.dart';
+import 'package:alquiler_app/presentation/screens/auth/auth.dart';
 import 'package:alquiler_app/presentation/screens/carousel/carousel_screen.dart';
 import 'package:alquiler_app/presentation/screens/login_page/login_page.dart';
 import 'package:alquiler_app/presentation/widgets/buttons.dart';
@@ -87,7 +88,9 @@ class WelcomeScreen extends StatelessWidget {
                       //TODO: aqui se hace el cambio con el login y despues al registro, lo puse asi por falta del login para redericcionar
                       Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (context) => LoginPage()),
+                        MaterialPageRoute(
+                          builder: (context) => Auth() /*LoginPage()*/,
+                        ),
                       );
                     },
                   ),
