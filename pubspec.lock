@@ -395,6 +395,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.4.6"
+  flutter_selector:
+    dependency: "direct main"
+    description:
+      name: flutter_selector
+      sha256: "0d2b8d7ba989daecc6cd704b4d73a4deea7d510ae7f65e6ea1839e020737affa"
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.0.3"
   flutter_svg:
     dependency: transitive
     description:
@@ -446,7 +454,7 @@ packages:
     source: hosted
     version: "0.15.6"
   http:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: http
       sha256: bb2ce4590bc2667c96f318d68cac1b5a7987ec819351d32b1c987239a815e007
