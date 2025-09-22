@@ -1,13 +1,22 @@
 import 'package:alquiler_app/l10n/app_localizations.dart';
+import 'package:alquiler_app/presentation/providers/transaction_provider.dart';
 import 'package:alquiler_app/presentation/screens/home/home_screen.dart';
+import 'package:alquiler_app/presentation/screens/welcome/welcome_screen.dart';
+import 'package:firebase_ui_auth/firebase_ui_auth.dart';
 import 'package:alquiler_app/presentation/screens/home/properties_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:firebase_auth/firebase_auth.dart' hide EmailAuthProvider;
+import 'package:provider/provider.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
   @override
   Widget build(BuildContext context) {
-    return BottomNavigationBarApp();
+    final user = FirebaseAuth.instance.currentUser!;
+    return ChangeNotifierProvider(
+      create: (_) => TransactionProvider(userId: user.uid)..loadCards(),
+      child: const BottomNavigationBarApp(),
+    );
   }
 }
 
@@ -21,11 +30,21 @@ class BottomNavigationBarApp extends StatefulWidget {
 class _BottomNavigationBarAppState extends State<BottomNavigationBarApp> {
   int _selectedIndex = 0;
 
-  static const List<Widget> _widgetOptions = <Widget>[
-    PropertiesScreen(),
-    _ViewExample(title: 'Vivienda'),
+  static final List<Widget> _widgetOptions = <Widget>[
     HomeScreen(),
-    _ViewExample(title: 'Profile'),
+    PropertiesScreen(),
+    const _ViewExample(title: 'Calculadora'),
+    ProfileScreen(
+      actions: [
+        SignedOutAction((context) {
+          Navigator.pushAndRemoveUntil(
+            context,
+            MaterialPageRoute(builder: (context) => const WelcomeScreen()),
+            (route) => false, // elimina toda la pila de navegación
+          );
+        }),
+      ],
+    ),
   ];
 
   void _onItemTapped(int index) {

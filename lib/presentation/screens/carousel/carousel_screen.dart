@@ -1,5 +1,6 @@
 import 'package:alquiler_app/l10n/app_localizations.dart';
-import 'package:alquiler_app/presentation/screens/registro/registro_screen.dart';
+import 'package:alquiler_app/presentation/screens/auth/auth.dart';
+//import 'package:alquiler_app/presentation/screens/registro/registro_screen.dart';
 import 'package:alquiler_app/presentation/widgets/buttons.dart';
 import 'package:alquiler_app/presentation/widgets/icon_backgr.dart';
 import 'package:carousel_slider/carousel_slider.dart';
@@ -26,7 +27,7 @@ class _CarouselScreenState extends State<CarouselScreen> {
     } else {
       Navigator.push(
         context,
-        MaterialPageRoute(builder: (context) => RegistroScreen()),
+        MaterialPageRoute(builder: (context) => Auth() /* RegistroScreen()*/),
       );
     }
   }

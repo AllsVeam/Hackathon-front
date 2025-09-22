@@ -1,10 +1,12 @@
 import 'package:alquiler_app/l10n/app_localizations.dart';
+import 'package:alquiler_app/presentation/providers/transaction_provider.dart';
 import 'package:alquiler_app/presentation/screens/home/accounts_screen.dart';
 import 'package:alquiler_app/presentation/screens/home/request_money_screen.dart';
 import 'package:alquiler_app/presentation/screens/home/send_money_screen.dart';
 import 'package:alquiler_app/presentation/screens/transactions/transactions_screen.dart';
 import 'package:alquiler_app/presentation/widgets/icon_bottom_action.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class QuickActionsWidget extends StatelessWidget {
   const QuickActionsWidget({super.key});
@@ -51,9 +53,9 @@ class _QuickActionsBuild extends StatelessWidget {
           Colors.purpleAccent,
           onPressed: () {
             Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => AccountsScreen()),
-                );
+              context,
+              MaterialPageRoute(builder: (context) => AccountsScreen()),
+            );
           },
         ),
         iconBottomAction(
@@ -63,9 +65,9 @@ class _QuickActionsBuild extends StatelessWidget {
           Colors.blue,
           onPressed: () {
             Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => SendMoneyScreen()),
-                );
+              context,
+              MaterialPageRoute(builder: (context) => SendMoneyScreen()),
+            );
           },
         ),
         iconBottomAction(
@@ -75,9 +77,9 @@ class _QuickActionsBuild extends StatelessWidget {
           Colors.green,
           onPressed: () {
             Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => RequestMoneyScreen()),
-                );
+              context,
+              MaterialPageRoute(builder: (context) => RequestMoneyScreen()),
+            );
           },
         ),
       ],
@@ -117,9 +119,18 @@ class _RecentTransaction extends StatelessWidget {
             ),
             InkWell(
               onTap: () {
+                final txProvider = Provider.of<TransactionProvider>(
+                  context,
+                  listen: false,
+                );
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => TransactionsScreen()),
+                  MaterialPageRoute(
+                    builder: (context) => ChangeNotifierProvider.value(
+                      value: txProvider,
+                      child: const TransactionsScreen(),
+                    ),
+                  ),
                 );
               },
               child: Text(

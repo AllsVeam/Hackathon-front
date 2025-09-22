@@ -46,6 +46,10 @@ dependencies:
   cupertino_icons: ^1.0.8
   shared_preferences: ^2.5.3
   provider: ^6.1.5+1
+  firebase_core: ^4.1.0
+  firebase_auth: ^6.0.2
+  firebase_ui_auth: ^3.0.0
+  cloud_firestore: ^6.0.1
   flutter_selector: ^1.0.3
   http: ^1.5.0
 
