@@ -1,10 +1,11 @@
 import 'package:alquiler_app/l10n/app_localizations.dart';
 import 'package:alquiler_app/presentation/screens/auth/auth.dart';
-//import 'package:alquiler_app/presentation/screens/registro/registro_screen.dart';
 import 'package:alquiler_app/presentation/widgets/buttons.dart';
 import 'package:alquiler_app/presentation/widgets/icon_backgr.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
+import 'package:flutter/gestures.dart'; // Importa este paquete para TapGestureRecognizer
 
 class CarouselScreen extends StatefulWidget {
   const CarouselScreen({super.key});
@@ -27,8 +28,15 @@ class _CarouselScreenState extends State<CarouselScreen> {
     } else {
       Navigator.push(
         context,
-        MaterialPageRoute(builder: (context) => Auth() /* RegistroScreen()*/),
+        MaterialPageRoute(builder: (context) => const Auth()),
       );
+    }
+  }
+
+  Future<void> _launchUrl() async {
+    final Uri url = Uri.parse('https://wallet.interledger-test.dev/');
+    if (!await launchUrl(url)) {
+      throw 'No se pudo abrir la URL';
     }
   }
 
@@ -41,17 +49,71 @@ class _CarouselScreenState extends State<CarouselScreen> {
       {
         'icon': Icons.wallet_outlined,
         'title': loc.carrouseltitle1,
-        'subtitle': loc.carrouselsubtitle1,
+        // Usamos una sola clave 'subtitle' que contendrá el RichText.
+        'subtitle': RichText(
+          textAlign: TextAlign.center, // Alinea el texto del RichText
+          text: TextSpan(
+            children: [
+              TextSpan(
+                text: loc.carrouselsubtitle1 + ' \n',
+                style: TextStyle(
+                  // Estilo para el texto principal
+                  color: Colors.grey[600],
+                  fontSize: MediaQuery.of(context).size.height * 0.018,
+                ),
+              ),
+              TextSpan(
+                text: "URL:https://wallet.interledger-test.dev/",
+                style: TextStyle(
+                  // Estilo para el enlace
+                  color: Colors.blue,
+                  decoration: TextDecoration.underline,
+                  fontSize: MediaQuery.of(context).size.height * 0.018,
+                ),
+                // Aquí es donde se hace clicable
+                recognizer: TapGestureRecognizer()
+                  ..onTap = _launchUrl,
+              ),
+            ],
+          ),
+        ),
       },
       {
         'icon': Icons.shield_outlined,
         'title': loc.carrouseltitle2,
-        'subtitle': loc.carrouselsubtitle2,
+        // Para los otros items, el 'subtitle' sigue siendo un String
+        'subtitle': Text(
+          loc.carrouselsubtitle2,
+          textAlign: TextAlign.center,
+          style: TextStyle(
+            fontSize: MediaQuery.of(context).size.height * 0.018,
+            color: Colors.grey[600],
+          ),
+        ),
       },
       {
         'icon': Icons.phone_iphone,
         'title': loc.carrouseltitle3,
-        'subtitle': loc.carrouselsubtitle3,
+        'subtitle': Text(
+          loc.carrouselsubtitle3,
+          textAlign: TextAlign.center,
+          style: TextStyle(
+            fontSize: MediaQuery.of(context).size.height * 0.018,
+            color: Colors.grey[600],
+          ),
+        ),
+      },
+      {
+        'icon': Icons.phone_outlined,
+        'title': "hola mundo",
+        'subtitle': Text(
+          "hols hols",
+          textAlign: TextAlign.center,
+          style: TextStyle(
+            fontSize: MediaQuery.of(context).size.height * 0.018,
+            color: Colors.grey[600],
+          ),
+        ),
       },
     ];
 
@@ -104,15 +166,9 @@ class _CarouselScreenState extends State<CarouselScreen> {
                         const SizedBox(height: 10),
                         Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 30.0),
-                          child: Text(
-                            item['subtitle'],
-                            textAlign: TextAlign.center,
-                            style: TextStyle(
-                              fontSize:
-                                  MediaQuery.of(context).size.height * 0.018,
-                              color: Colors.grey[600],
-                            ),
-                          ),
+                          // Aquí usamos el subtítulo que puede ser un Widget o un String
+                          // Por eso, es mejor que todos los 'subtitle' sean widgets para evitar errores.
+                          child: item['subtitle'],
                         ),
                       ],
                     );

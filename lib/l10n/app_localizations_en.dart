@@ -48,7 +48,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get profile => 'Profile';
 
   @override
-  String get goodAfeternoom => 'Good Afeternoom';
+  String get goodAfeternoom => 'goodAfternoon';
 
   @override
   String get quickActions => 'Quick Actions';
@@ -135,7 +135,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get linkSignIn => 'Sign In';
 
   @override
-  String get carrouseltitle1 => 'Manage Your Money';
+  String get carrouseltitle1 => 'You need to have a wallet';
 
   @override
   String get carrouseltitle2 => 'Bank-Level Security';
@@ -144,7 +144,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get carrouseltitle3 => 'Easy & Convenient';
 
   @override
-  String get carrouselsubtitle1 => 'Send, receive, and manage all your finances in one secure place.';
+  String get carrouselsubtitle1 => 'Create your wallet at the following URL';
 
   @override
   String get carrouselsubtitle2 => 'Your money and data are protected with military-grade encryption.';

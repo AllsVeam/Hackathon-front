@@ -176,7 +176,7 @@ abstract class AppLocalizations {
   /// No description provided for @goodAfeternoom.
   ///
   /// In en, this message translates to:
-  /// **'Good Afeternoom'**
+  /// **'goodAfternoon'**
   String get goodAfeternoom;
 
   /// No description provided for @quickActions.
@@ -350,7 +350,7 @@ abstract class AppLocalizations {
   /// No description provided for @carrouseltitle1.
   ///
   /// In en, this message translates to:
-  /// **'Manage Your Money'**
+  /// **'You need to have a wallet'**
   String get carrouseltitle1;
 
   /// No description provided for @carrouseltitle2.
@@ -368,7 +368,7 @@ abstract class AppLocalizations {
   /// No description provided for @carrouselsubtitle1.
   ///
   /// In en, this message translates to:
-  /// **'Send, receive, and manage all your finances in one secure place.'**
+  /// **'Create your wallet at the following URL'**
   String get carrouselsubtitle1;
 
   /// No description provided for @carrouselsubtitle2.
