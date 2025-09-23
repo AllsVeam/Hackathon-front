@@ -23,8 +23,6 @@ class PropertiesScreen extends StatelessWidget {
       body: SingleChildScrollView(
         child: Column(
           children: [
-
-             QuickActionsWidget(),
             // Mandamos a llamar al widget de la barra de búsqueda
             const SearchBarWidget(),
           
@@ -58,9 +56,6 @@ class PropertiesScreen extends StatelessWidget {
             ),
 
             const SizedBox(height: 20),
-            
-            // Agrega el botón aquí
-            const MyPropertiesButtonWidget(),
             
             const SizedBox(height: 20),
           ],
