@@ -71,8 +71,7 @@ class _CarouselScreenState extends State<CarouselScreen> {
                   fontSize: MediaQuery.of(context).size.height * 0.018,
                 ),
                 // Aquí es donde se hace clicable
-                recognizer: TapGestureRecognizer()
-                  ..onTap = _launchUrl,
+                recognizer: TapGestureRecognizer()..onTap = _launchUrl,
               ),
             ],
           ),

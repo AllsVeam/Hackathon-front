@@ -62,7 +62,7 @@ class WelcomeScreen extends StatelessWidget {
                     ),
                   ),
                   TextTitle(
-                    text: 'Alquiler CDMX',
+                    text: 'RoomiePay',
                     style: TextStyle(
                       color: white,
                       fontWeight: FontWeight.bold,

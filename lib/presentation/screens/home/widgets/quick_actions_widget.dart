@@ -30,7 +30,7 @@ class QuickActionsWidget extends StatelessWidget {
           ),
           SizedBox(height: 10),
           _QuickActionsBuild(),
-          //_RecentTransaction(),
+          _RecentTransaction(),
         ],
       ),
     );
@@ -43,6 +43,8 @@ class _QuickActionsBuild extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final loc = AppLocalizations.of(context)!;
+    final transactions = Provider.of<TransactionProvider>(context);
+
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
@@ -64,9 +66,19 @@ class _QuickActionsBuild extends StatelessWidget {
           loc.send,
           Colors.blue,
           onPressed: () {
+            /*
             Navigator.push(
               context,
               MaterialPageRoute(builder: (context) => SendMoneyScreen()),
+            );*/
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => ChangeNotifierProvider.value(
+                  value: transactions,
+                  child: const SendMoneyScreen(),
+                ),
+              ),
             );
           },
         ),

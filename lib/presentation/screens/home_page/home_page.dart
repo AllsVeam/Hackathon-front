@@ -14,7 +14,7 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     final user = FirebaseAuth.instance.currentUser!;
     return ChangeNotifierProvider(
-      create: (_) => TransactionProvider(userId: user.uid)..loadCards(),
+      create: (_) => TransactionProvider(userId: user.uid)..load(),
       child: const BottomNavigationBarApp(),
     );
   }
