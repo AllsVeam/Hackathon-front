@@ -1,6 +1,9 @@
 import 'package:alquiler_app/l10n/app_localizations.dart';
+import 'package:alquiler_app/presentation/providers/account_provider.dart';
 import 'package:alquiler_app/presentation/providers/transaction_provider.dart';
+import 'package:alquiler_app/presentation/screens/cliente/claculadora/calculator_screen.dart';
 import 'package:alquiler_app/presentation/screens/home/home_screen.dart';
+import 'package:alquiler_app/presentation/screens/profile/custom_profile_screen.dart';
 import 'package:alquiler_app/presentation/screens/welcome/welcome_screen.dart';
 import 'package:firebase_ui_auth/firebase_ui_auth.dart';
 import 'package:alquiler_app/presentation/screens/home/properties_screen.dart';
@@ -13,8 +16,18 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final user = FirebaseAuth.instance.currentUser!;
-    return ChangeNotifierProvider(
-      create: (_) => TransactionProvider(userId: user.uid)..load(),
+    final accountProvider = Provider.of<AccountProvider>(
+      context,
+      listen: false,
+    );
+    accountProvider.updateUid(user.uid);
+
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(
+          create: (_) => TransactionProvider(userId: user.uid)..load(),
+        ),
+      ],
       child: const BottomNavigationBarApp(),
     );
   }
@@ -33,8 +46,8 @@ class _BottomNavigationBarAppState extends State<BottomNavigationBarApp> {
   static final List<Widget> _widgetOptions = <Widget>[
     HomeScreen(),
     PropertiesScreen(),
-    const _ViewExample(title: 'Calculadora'),
-    ProfileScreen(
+    CalculatorScreen(),
+    /*ProfileScreen(
       actions: [
         SignedOutAction((context) {
           Navigator.pushAndRemoveUntil(
@@ -44,7 +57,8 @@ class _BottomNavigationBarAppState extends State<BottomNavigationBarApp> {
           );
         }),
       ],
-    ),
+    ),*/
+    CustomProfileScreen(),
   ];
 
   void _onItemTapped(int index) {

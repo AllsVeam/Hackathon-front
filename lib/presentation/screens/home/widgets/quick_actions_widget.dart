@@ -1,4 +1,5 @@
 import 'package:alquiler_app/l10n/app_localizations.dart';
+import 'package:alquiler_app/presentation/providers/account_provider.dart';
 import 'package:alquiler_app/presentation/providers/transaction_provider.dart';
 import 'package:alquiler_app/presentation/screens/home/accounts_screen.dart';
 import 'package:alquiler_app/presentation/screens/home/request_money_screen.dart';
@@ -44,6 +45,7 @@ class _QuickActionsBuild extends StatelessWidget {
   Widget build(BuildContext context) {
     final loc = AppLocalizations.of(context)!;
     final transactions = Provider.of<TransactionProvider>(context);
+    final account = Provider.of<AccountProvider>(context);
 
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -56,7 +58,12 @@ class _QuickActionsBuild extends StatelessWidget {
           onPressed: () {
             Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => AccountsScreen()),
+              MaterialPageRoute(
+                builder: (context) => ChangeNotifierProvider.value(
+                  value: account,
+                  child: const AccountsScreen(),
+                ),
+              ),
             );
           },
         ),
@@ -66,11 +73,6 @@ class _QuickActionsBuild extends StatelessWidget {
           loc.send,
           Colors.blue,
           onPressed: () {
-            /*
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => SendMoneyScreen()),
-            );*/
             Navigator.push(
               context,
               MaterialPageRoute(
