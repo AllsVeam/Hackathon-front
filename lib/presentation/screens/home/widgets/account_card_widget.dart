@@ -1,38 +1,31 @@
+import 'package:alquiler_app/presentation/widgets/icon_bottom_app.dart';
 import 'package:flutter/material.dart';
 //import 'package:alquiler_app/models/account_model.dart';
 //import 'package:alquiler_app/services/api_service.dart';
 
-
 class _SingleAccountCard extends StatelessWidget {
-  final String accountName; 
+  final String accountName;
   final String currencyCode;
   final String balance;
 
   const _SingleAccountCard({
-    required this.accountName, 
+    required this.accountName,
     required this.currencyCode,
     required this.balance,
   });
 
   @override
   Widget build(BuildContext context) {
-    
-    const Color cardBackgroundColor = Color(0xFF4C0099);
-    const Color borderColor = Color(0xFF00FFFF);
-    const Color chipBackgroundColor = Color(0xFF00FFFF);
-    const Color textColor = Colors.white;
+    Color cardBackgroundColor = Color(0xFF4C0099);
 
     return Container(
       width: double.infinity,
-      height: 180, 
+      height: 180,
       margin: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
       decoration: BoxDecoration(
-        color: const Color.fromARGB(255, 25, 24, 26),
+        color: Theme.of(context).cardColor,
         borderRadius: BorderRadius.circular(15),
-        border: Border.all(
-          color: borderColor,
-          width: 3,
-        ),
+        border: Border.all(color: Theme.of(context).cardColor, width: 3),
       ),
       child: Padding(
         padding: const EdgeInsets.all(20.0),
@@ -42,17 +35,16 @@ class _SingleAccountCard extends StatelessWidget {
             // Título de la cuenta
             Text(
               accountName,
-              style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-                    color: textColor,
-                    fontWeight: FontWeight.bold,
-                  ),
+              style: Theme.of(
+                context,
+              ).textTheme.headlineSmall?.copyWith(fontWeight: FontWeight.bold),
             ),
             const SizedBox(height: 10),
             // Chip de la moneda
             Container(
               padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
               decoration: BoxDecoration(
-                color: chipBackgroundColor,
+                color: Theme.of(context).cardColor,
                 borderRadius: BorderRadius.circular(8),
               ),
               child: Text(
@@ -70,11 +62,7 @@ class _SingleAccountCard extends StatelessWidget {
               alignment: Alignment.bottomRight,
               child: Text(
                 '$currencyCode$balance',
-                style: const TextStyle(
-                  color: textColor,
-                  fontSize: 32,
-                  fontWeight: FontWeight.bold,
-                ),
+                style: TextStyle(fontSize: 32, fontWeight: FontWeight.bold),
               ),
             ),
           ],
@@ -114,36 +102,55 @@ class _AccountCardWidgetState extends State<AccountCardWidget> {
     // Lógica simulada de la API
     return Future.delayed(const Duration(seconds: 2), () {
       final List<Map<String, String>> data = [
-        {'name': 'Cuenta Principal', 'currencyCode': 'MX\$', 'balance': '9,999,999.99'},
+        {
+          'name': 'Cuenta Principal',
+          'currencyCode': 'MX\$',
+          'balance': '9,999,999.99',
+        },
       ];
       return data;
     });
   }
 
   final List<Map<String, String>> _harcodedData = [
-    {'name': 'Cuenta Ahorro', 'currencyCode': 'MX\$', 'balance': '9,999,999.99'},
+    {
+      'name': 'Cuenta Ahorro',
+      'currencyCode': 'MX\$',
+      'balance': '9,999,999.99',
+    },
     {'name': 'Cuenta Dólares', 'currencyCode': 'USD', 'balance': '50,000.00'},
     {'name': 'Cuenta Viajes', 'currencyCode': 'EUR', 'balance': '1,200.50'},
   ];
 
   @override
   Widget build(BuildContext context) {
-    const Color cardBackgroundColor = Color.fromARGB(255, 25, 25, 26);
-
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Mis Cuentas', style: TextStyle(color: Colors.white)),
-        backgroundColor: cardBackgroundColor,
-        iconTheme: const IconThemeData(color: Colors.white),
+        title: Text(
+          'Mis Cuentas',
+          style: TextStyle(color: Theme.of(context).primaryColorLight),
+        ),
+
+        actions: [
+          iconButtonApp(
+            icon: Icons.notifications,
+            color: Theme.of(context).primaryColorLight,
+            onPressed: () {},
+          ),
+        ],
       ),
-      backgroundColor: cardBackgroundColor,
       body: FutureBuilder<List<Map<String, String>>>(
         future: _futureAccountData,
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return const Center(child: CircularProgressIndicator());
           } else if (snapshot.hasError) {
-            return Center(child: Text('Error: ${snapshot.error}', style: const TextStyle(color: Colors.white)));
+            return Center(
+              child: Text(
+                'Error: ${snapshot.error}',
+                style: TextStyle(color: Theme.of(context).primaryColorLight),
+              ),
+            );
           } else if (snapshot.hasData) {
             return SingleChildScrollView(
               child: Column(
@@ -152,7 +159,7 @@ class _AccountCardWidgetState extends State<AccountCardWidget> {
                   final accountName = data['name'] ?? 'Nombre no disponible';
                   final currencyCode = data['currencyCode'] ?? '';
                   final balance = data['balance'] ?? '0.00';
-                  
+
                   return _SingleAccountCard(
                     accountName: accountName,
                     currencyCode: currencyCode,
@@ -162,78 +169,15 @@ class _AccountCardWidgetState extends State<AccountCardWidget> {
               ),
             );
           } else {
-            return const Center(child: Text('No hay datos disponibles.', style: TextStyle(color: Colors.white)));
+            return const Center(
+              child: Text(
+                'No hay datos disponibles.',
+                style: TextStyle(color: Colors.white),
+              ),
+            );
           }
         },
       ),
     );
   }
 }
-
-//codigo para cuando alla api sin diseno 
-/*class AccountCardWidget extends StatefulWidget {
-  const AccountCardWidget({super.key});
-
-  @override
-  State<AccountCardWidget> createState() => _AccountCardWidgetState();
-}
-
-class _AccountCardWidgetState extends State<AccountCardWidget> {
-  late Future<AccountModel> futureAccount;
-
-  @override
-  void initState() {
-    super.initState();
-    futureAccount = ApiService().fetchAccountData();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Mi Cuenta'),
-      ),
-      body: Center(
-        child: FutureBuilder<AccountModel>(
-          future: futureAccount,
-          builder: (context, snapshot) {
-            if (snapshot.connectionState == ConnectionState.waiting) {
-              return const CircularProgressIndicator();
-            } else if (snapshot.hasError) {
-              return Text('Error: ${snapshot.error}');
-            } else if (snapshot.hasData) {
-              final account = snapshot.data!.pageProps.account;
-              return Card(
-                margin: const EdgeInsets.all(16),
-                child: Padding(
-                  padding: const EdgeInsets.all(16),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      Text(
-                        'Nombre de la cuenta: ${account.name}',
-                        style: Theme.of(context).textTheme.headlineSmall,
-                      ),
-                      const SizedBox(height: 8),
-                      Text(
-                        'Balance: ${double.parse(account.balance) / 100} ${account.assetCode}',
-                        style: Theme.of(context).textTheme.titleLarge,
-                      ),
-                      const SizedBox(height: 16),
-                      Text('ID de la cuenta: ${account.id}'),
-                      Text('Fecha de creación: ${account.createdAt.toLocal().toString().substring(0, 10)}'),
-                      Text('ID de usuario: ${account.userId}'),
-                    ],
-                  ),
-                ),
-              );
-            } else {
-              return const Text('No se encontraron datos de la cuenta.');
-            }
-          },
-        ),
-      ),
-    );
-  }
-}*/
