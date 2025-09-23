@@ -1,6 +1,5 @@
 import 'package:alquiler_app/l10n/app_localizations.dart';
-import 'package:alquiler_app/presentation/screens/auth/auth.dart';
-import 'package:alquiler_app/presentation/screens/auth/auth_Register.dart';
+import 'package:alquiler_app/presentation/screens/auth/auth_register.dart';
 import 'package:alquiler_app/presentation/widgets/buttons.dart';
 import 'package:alquiler_app/presentation/widgets/icon_backgr.dart';
 import 'package:carousel_slider/carousel_slider.dart';

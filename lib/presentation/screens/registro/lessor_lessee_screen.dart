@@ -31,8 +31,9 @@ class _LessorLesseeScreenState extends State<LessorLesseeScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final _user = FirebaseAuth.instance.currentUser!;
     return Scaffold(
-      appBar: AppBar(title: const Text('Completa tu Registro')),
+      appBar: AppBar(title: Text('Completa tu Registro')),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(16.0),
         child: Column(
@@ -92,49 +93,45 @@ class _LessorLesseeScreenState extends State<LessorLesseeScreen> {
             ),
             const SizedBox(height: 40),
             ElevatedButton(
-            onPressed: () async {
-              
-              final user = FirebaseAuth.instance.currentUser;
-              if (user == null) {
-                
-                return;
-              }
-              
-              
-              final userData = {
-                'name': _nameController.text,
-                'lastName': _lastNameController.text,
-                'phone': _phoneController.text,
-                'userRole': _selectedRole.name, 
-              };
-              
-              
-              await FirebaseFirestore.instance
-                  .collection('users')
-                  .doc(user.uid)
-                  .set(userData);
-                  
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => DocumentUploadScreen(
-                    userRole: _selectedRole,
-                    name: _nameController.text,
-                    lastName: _lastNameController.text,
-                    phone: _phoneController.text,
-                  ),
-                ),
-              );
-            },
-            child: const Text('Continuar'),
-          ),
-                    ],
-                  ),
-                ),
-              );
-            }
+              onPressed: () async {
+                final user = FirebaseAuth.instance.currentUser;
+                if (user == null) {
+                  return;
+                }
 
-          
+                final userData = {
+                  'uid': _user.uid,
+                  'name': _nameController.text,
+                  'lastName': _lastNameController.text,
+                  'phone': _phoneController.text,
+                  'userRole': _selectedRole.name,
+                  'createdAt': FieldValue.serverTimestamp(),
+                };
+
+                await FirebaseFirestore.instance
+                    .collection('users')
+                    .doc(user.uid)
+                    .set(userData);
+
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => DocumentUploadScreen(
+                      userRole: _selectedRole,
+                      name: _nameController.text,
+                      lastName: _lastNameController.text,
+                      phone: _phoneController.text,
+                    ),
+                  ),
+                );
+              },
+              child: const Text('Continuar'),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
 
   Widget customInputField({
     required String hintText,

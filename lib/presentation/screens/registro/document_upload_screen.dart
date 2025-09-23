@@ -32,7 +32,9 @@ class _DocumentUploadScreenState extends State<DocumentUploadScreen> {
 
   // Método para tomar la fotografía
   Future<void> _takePhoto() async {
-    final XFile? pickedFile = await _picker.pickImage(source: ImageSource.camera);
+    final XFile? pickedFile = await _picker.pickImage(
+      source: ImageSource.camera,
+    );
 
     if (pickedFile != null) {
       setState(() {
@@ -56,21 +58,32 @@ class _DocumentUploadScreenState extends State<DocumentUploadScreen> {
             ),
             Text('Tu rol seleccionado es: ${widget.userRole.name}'),
             const SizedBox(height: 20),
-            _buildDocumentUploadField(context, 'INE o Credencial escolar', 'Subir'),
+            _buildDocumentUploadField(
+              context,
+              'INE o Credencial escolar',
+              'Subir',
+            ),
             const SizedBox(height: 32),
-            Text('Sube tu Documento para verificar que eres una persona real', textAlign: TextAlign.center),
+            Text(
+              'Sube tu Documento para verificar que eres una persona real',
+              textAlign: TextAlign.center,
+            ),
             const SizedBox(height: 20),
             SizedBox(
               width: double.infinity,
               height: 50,
               child: ElevatedButton(
                 onPressed: () {
-                  Navigator.pushReplacement(
+                  Navigator.pushAndRemoveUntil(
                     context,
-                    MaterialPageRoute(builder: (context) => const HomePage()),
+                    MaterialPageRoute(builder: (context) => HomePage()),
+                    (route) => false,
                   );
                 },
-                child: const Text('Finalizar Registro', style: TextStyle(fontSize: 18)),
+                child: const Text(
+                  'Finalizar Registro',
+                  style: TextStyle(fontSize: 18),
+                ),
               ),
             ),
           ],
@@ -79,7 +92,11 @@ class _DocumentUploadScreenState extends State<DocumentUploadScreen> {
     );
   }
 
-  Widget _buildDocumentUploadField(BuildContext context, String title, String buttonText) {
+  Widget _buildDocumentUploadField(
+    BuildContext context,
+    String title,
+    String buttonText,
+  ) {
     return Container(
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
