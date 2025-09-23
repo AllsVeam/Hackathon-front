@@ -1,3 +1,5 @@
+import 'package:alquiler_app/presentation/screens/cliente/claculadora/widgets/pay_now_button_widget.dart';
+import 'package:alquiler_app/presentation/screens/home/send_money_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
@@ -6,7 +8,7 @@ class PaymentInfoWidget extends StatefulWidget {
   final String time;
   final String balance;
   final bool isCurrent;
-  final String? userRole;
+  final String? UserRole;
   final String status; 
 
   const PaymentInfoWidget({
@@ -15,7 +17,7 @@ class PaymentInfoWidget extends StatefulWidget {
     required this.time,
     required this.balance,
     required this.isCurrent,
-    this.userRole,
+    this.UserRole,
     required this.status, 
   });
 
@@ -154,20 +156,16 @@ class _PaymentInfoWidgetState extends State<PaymentInfoWidget> {
                 ),
               ),
               // Muestra el botón de "Pagar" solo si el rol es "arrendatario"
-              if (widget.userRole == 'arrendatario')
-                ElevatedButton(
-                  onPressed: () {
-                    // Lógica para realizar el pago
-                  },
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.lightGreen[400],
-                    foregroundColor: Colors.white,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(8),
-                    ),
-                  ),
-                  child: const Text('Pagar'),
-                ),
+              if (widget.UserRole == 'arrendatario')
+                PayNowButtonWidget(
+              label: 'Proceder al pago',
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => const SendMoneyScreen()),
+                );
+              },
+            )
             ],
           ),
         ],

@@ -3,7 +3,6 @@ import 'package:alquiler_app/presentation/screens/cliente/widgets/payment_info_w
 import 'package:alquiler_app/presentation/screens/cliente/widgets/property_image_carousel_widget.dart';
 import 'package:alquiler_app/presentation/screens/vendedor/publish_property_screen.dart';
 import 'package:alquiler_app/presentation/screens/vendedor/widgets/buyer_info_widget.dart';
-import 'package:alquiler_app/presentation/screens/vendedor/widgets/my_properties_button_widget.dart';
 import 'package:alquiler_app/presentation/screens/vendedor/widgets/property_status_chip_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -151,9 +150,8 @@ class _MyPropertiesListScreenState extends State<MyPropertiesListScreen> {
     required String balance,
     required bool isCurrent,
     required String status,
-    required String? userRole, 
+    required String? userRole,
   }) {
-    
     String displayedStatus = status;
     if (userRole == 'arrendatario') {
       if (status == 'Vendido' || status == 'Rentado') {
@@ -161,7 +159,6 @@ class _MyPropertiesListScreenState extends State<MyPropertiesListScreen> {
       } else if (status == 'Publicado') {
         displayedStatus = 'Sin estatus';
       } else {
-       
         displayedStatus = status;
       }
     }
@@ -179,8 +176,8 @@ class _MyPropertiesListScreenState extends State<MyPropertiesListScreen> {
               alignment: Alignment.topRight,
               child: PropertyStatusChipWidget(status: displayedStatus),
             ),
-            const SizedBox(height: 10), 
-            
+            const SizedBox(height: 10),
+
             PropertyImageCarouselWidget(imageUrls: [imageUrls.first]),
             const SizedBox(height: 10),
 
@@ -192,10 +189,10 @@ class _MyPropertiesListScreenState extends State<MyPropertiesListScreen> {
               time: time,
               balance: balance,
               isCurrent: isCurrent,
-              userRole: userRole,
-              status: status, 
+              UserRole: userRole,
+              status: status,
             ),
-            
+
             // El botón "Ver detalle" ahora siempre se muestra
             Align(
               alignment: Alignment.centerRight,

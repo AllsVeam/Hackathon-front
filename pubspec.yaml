@@ -117,7 +117,7 @@ flutter:
   generate: true
 
 flutter_intl:
-  enabled: true
+  enabled: false
 
 l10n:
   arb-dir: lib/l10n

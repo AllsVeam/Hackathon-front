@@ -18,6 +18,7 @@ class MyHomePageScreen extends StatelessWidget {
     const String balance = '\$90,000';
     const bool isCurrent = true; 
     const String status = 'Vendido'; 
+    const String userRole = 'arrendatario';
 
     return Scaffold(
       appBar: AppBar(
@@ -42,6 +43,7 @@ class MyHomePageScreen extends StatelessWidget {
               balance: balance,
               isCurrent: isCurrent,
               status: status,
+              UserRole: userRole,
             ),
           ],
         ),
