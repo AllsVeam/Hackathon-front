@@ -1,4 +1,5 @@
 import 'package:alquiler_app/l10n/app_localizations.dart';
+import 'package:alquiler_app/presentation/providers/account_provider.dart';
 import 'package:alquiler_app/presentation/providers/transaction_provider.dart';
 import 'package:alquiler_app/presentation/screens/cliente/claculadora/calculator_screen.dart';
 import 'package:alquiler_app/presentation/screens/home/home_screen.dart';
@@ -15,8 +16,18 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final user = FirebaseAuth.instance.currentUser!;
-    return ChangeNotifierProvider(
-      create: (_) => TransactionProvider(userId: user.uid)..load(),
+    final accountProvider = Provider.of<AccountProvider>(
+      context,
+      listen: false,
+    );
+    accountProvider.updateUid(user.uid);
+
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(
+          create: (_) => TransactionProvider(userId: user.uid)..load(),
+        ),
+      ],
       child: const BottomNavigationBarApp(),
     );
   }

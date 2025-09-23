@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:alquiler_app/domain/entities/account.dart';
 import 'package:alquiler_app/domain/entities/paymentSend.dart';
 import 'package:alquiler_app/domain/entities/paymentSendResponse.dart';
 import 'package:http/http.dart' as http;
@@ -42,6 +43,24 @@ class OpenPaymentsService {
     } else {
       throw Exception(
         "Error al completar el pago. Código: ${response.statusCode}, Body: ${response.body}",
+      );
+    }
+  }
+
+  static Future<Account> searchWallet(String wa) async {
+    final url = Uri.parse(wa);
+
+    final response = await http.get(
+      url,
+      headers: {"Content-Type": "application/json"},
+    );
+
+    if (response.statusCode == 200) {
+      final data = jsonDecode(response.body);
+      return Account.fromMap(data);
+    } else {
+      throw Exception(
+        "Error al iniciar el pago. Código: ${response.statusCode}, Body: ${response.body}",
       );
     }
   }
