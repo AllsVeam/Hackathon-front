@@ -141,7 +141,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get carrouseltitle2 => 'Congratulations, you now have a wallet.';
 
   @override
-  String get carrouseltitle3 => 'Easy & Convenient';
+  String get carrouseltitle3 => 'Obtén tu dirección de billetera';
 
   @override
   String get carrouselsubtitle1 => 'Create your wallet at the following URL';

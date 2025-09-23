@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:alquiler_app/domain/entities/allWallet.dart';
 import 'package:alquiler_app/domain/entities/paymentSend.dart';
 import 'package:alquiler_app/domain/entities/paymentSendResponse.dart';
 import 'package:http/http.dart' as http;
@@ -67,4 +68,27 @@ static Future<Map<String, dynamic>> completePay(PaymentsendResponse pr) async {
     );
   }
 }
+// En tu servicio de API (OpenPaymentsService.dart)
+static Future<allWallet> getAllWallet(String name) async {
+  final url = Uri.parse("$_baseUrl/AllBIlletera?name=$name");
+  print(url);
+  final response = await http.get(
+    url,
+    headers: {
+      'Content-Type': 'application/json',
+      'Accept': 'application/json',
+    },
+  );
+
+  if (response.statusCode == 200) {
+    final data = jsonDecode(response.body) as Map<String, dynamic>;
+    return allWallet.fromMap(data);
+  } else {
+    throw Exception(
+      "Error al obtener la billetera. Código: ${response.statusCode}, Body: ${response.body}",
+    );
+  }
+}
+
+
 }

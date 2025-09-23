@@ -141,7 +141,7 @@ class AppLocalizationsEs extends AppLocalizations {
   String get carrouseltitle2 => 'Felicidades ahora tienes una billetera';
 
   @override
-  String get carrouseltitle3 => 'Fácil y conveniente';
+  String get carrouseltitle3 => 'Obten tu direccion de billetera';
 
   @override
   String get carrouselsubtitle1 => 'Crea tu billetera en la siguiente URL.';

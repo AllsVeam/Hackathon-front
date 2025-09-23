@@ -362,7 +362,7 @@ abstract class AppLocalizations {
   /// No description provided for @carrouseltitle3.
   ///
   /// In en, this message translates to:
-  /// **'Easy & Convenient'**
+  /// **'Obtén tu dirección de billetera'**
   String get carrouseltitle3;
 
   /// No description provided for @carrouselsubtitle1.
