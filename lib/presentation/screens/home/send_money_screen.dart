@@ -1,4 +1,5 @@
 import 'package:alquiler_app/domain/entities/paymentSend.dart';
+import 'package:alquiler_app/presentation/providers/account_provider.dart';
 import 'package:alquiler_app/presentation/providers/transaction_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -14,7 +15,7 @@ class SendMoneyScreen extends StatefulWidget {
 
 class _SendMoneyScreenState extends State<SendMoneyScreen> {
   // Sender fijo
-  final String _senderWalletAddressUrl =
+  String? _senderWalletAddressUrl =
       'https://ilp.interledger-test.dev/prueba-mvr';
 
   // Receiver dinámico
@@ -35,6 +36,13 @@ class _SendMoneyScreenState extends State<SendMoneyScreen> {
   @override
   Widget build(BuildContext context) {
     final transactions = Provider.of<TransactionProvider>(context);
+    final account = Provider.of<AccountProvider>(context);
+
+    final walletAddresses = account.accounts
+        .map((acc) => acc.id!) // o acc.id si prefieres
+        .where((w) => w.isNotEmpty)
+        .toSet()
+        .toList();
 
     return Scaffold(
       appBar: AppBar(
@@ -54,7 +62,19 @@ class _SendMoneyScreenState extends State<SendMoneyScreen> {
               style: TextStyle(color: _labelTextColor, fontSize: 16),
             ),
             const SizedBox(height: 10),
-            Text(_senderWalletAddressUrl, style: TextStyle(color: _textColor)),
+            _buildLabeledDropdown(
+              label: 'Sender Wallet Address *',
+              hintText: 'Select sender wallet address...',
+              value: walletAddresses.contains(_senderWalletAddressUrl)
+                  ? _senderWalletAddressUrl
+                  : null,
+              items: walletAddresses,
+              onChanged: (String? newValue) {
+                setState(() {
+                  _senderWalletAddressUrl = newValue;
+                });
+              },
+            ),
             const SizedBox(height: 30),
 
             // Receiver
@@ -172,7 +192,7 @@ class _SendMoneyScreenState extends State<SendMoneyScreen> {
             );
 
             final body = Paymentsend(
-              senderWalletAddressUrl: _senderWalletAddressUrl,
+              senderWalletAddressUrl: _senderWalletAddressUrl!,
               receiverWalletAddressUrl: _receiverWalletAddress!,
               amount: _amountController.text,
             );
@@ -203,7 +223,6 @@ class _SendMoneyScreenState extends State<SendMoneyScreen> {
                               await transactions.completedPlay();
                               Navigator.pop(context);
                               Navigator.pop(context);
-
                             },
                             child: const Text("Continue"),
                           ),

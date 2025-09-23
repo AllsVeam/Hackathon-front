@@ -9,7 +9,7 @@ import 'package:http/http.dart' as http;
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class OpenPaymentsService {
-  static const String _baseUrl = "http://192.168.100.180:3000/api";
+  static const String _baseUrl = "https://kcdgtprc-3000.usw3.devtunnels.ms/api";
 
   static Future<PaymentsendResponse> sendPay(Paymentsend py) async {
     final url = Uri.parse("$_baseUrl/start-pay");

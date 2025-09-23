@@ -60,12 +60,18 @@ class TransactionProvider extends ChangeNotifier {
   }
 
   Future<void> completedPlay() async {
-    print("Hola mundo");
-    print(_paymentsendResponse);
     try {
       await OpenPaymentsService.completePay(_paymentsendResponse);
       isLoadingsendPay = false;
-      notifyListeners();
+      final tx = TransactionModel(
+        uid: userId,
+        type: 'out',
+        name: 'Pago de renta',
+        concepto: 'Pago mensual de habitación',
+        count: double.parse(paymentsend.amount),
+        date: DateTime.now().toIso8601String(),
+      );
+      add(tx);
     } catch (e) {
       debugPrint("Error en send: $e");
       isLoadingsendPay = false;
