@@ -6,7 +6,7 @@ import 'package:alquiler_app/domain/entities/transaction.dart';
 import 'package:flutter/material.dart';
 
 class TransactionProvider extends ChangeNotifier {
-  final String userId;
+  String userId;
   bool isLoading = true;
   List<TransactionModel> _transfers = [];
   TransactionProvider({required this.userId});
@@ -72,10 +72,16 @@ class TransactionProvider extends ChangeNotifier {
         date: DateTime.now().toIso8601String(),
       );
       add(tx);
+      notifyListeners();
     } catch (e) {
       debugPrint("Error en send: $e");
       isLoadingsendPay = false;
       notifyListeners();
     }
+  }
+
+  void updateUid(String newUid) {
+    userId = newUid;
+    load(); // recarga las cuentas del usuario
   }
 }

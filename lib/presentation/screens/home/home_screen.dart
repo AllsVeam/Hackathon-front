@@ -1,6 +1,7 @@
 import 'package:alquiler_app/l10n/app_localizations.dart';
 import 'package:alquiler_app/presentation/providers/locale_provider.dart';
 import 'package:alquiler_app/presentation/providers/theme/theme_provider.dart';
+import 'package:alquiler_app/presentation/providers/transaction_provider.dart';
 import 'package:alquiler_app/presentation/screens/home/widgets/quick_actions_widget.dart';
 import 'package:alquiler_app/presentation/screens/home/widgets/transactions_card_widget.dart';
 import 'package:alquiler_app/presentation/widgets/transactions_list_widget.dart';
@@ -17,6 +18,9 @@ class HomeScreen extends StatelessWidget {
     final size = MediaQuery.of(context).size;
     final loc = AppLocalizations.of(context)!;
     final themeProvider = Provider.of<ThemeProvider>(context);
+    final transaction = Provider.of<TransactionProvider>(context);
+    transaction.load();
+
     // HACK: si es necesario condicionar un elemento por medio del color del tema
     //final bool light = Theme.of(context).brightness == Brightness.light;
 

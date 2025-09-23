@@ -22,6 +22,13 @@ class HomePage extends StatelessWidget {
     );
     accountProvider.updateUid(user.uid);
 
+    final transactionProvider = Provider.of<TransactionProvider>(
+      context,
+      listen: false,
+    );
+
+    transactionProvider.updateUid(user.uid);
+
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(
