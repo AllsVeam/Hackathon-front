@@ -1,55 +1,76 @@
-import 'package:alquiler_app/presentation/screens/home/home_screen.dart';
+import 'dart:io';
+
+import 'package:alquiler_app/presentation/screens/home_page/home_page.dart';
 import 'package:flutter/material.dart';
+import 'package:alquiler_app/presentation/screens/registro/lessor_lessee_screen.dart';
+import 'package:image_picker/image_picker.dart';
 
 class DocumentUploadScreen extends StatefulWidget {
-  const DocumentUploadScreen({super.key});
+  final UserRole userRole;
+  final String name;
+  final String lastName;
+  final String phone;
+
+  const DocumentUploadScreen({
+    super.key,
+    required this.userRole,
+    required this.name,
+    required this.lastName,
+    required this.phone,
+  });
 
   @override
   State<DocumentUploadScreen> createState() => _DocumentUploadScreenState();
 }
 
 class _DocumentUploadScreenState extends State<DocumentUploadScreen> {
-  String? _selectedLocation;
-  final List<String> _locations = ['Ciudad de México', 'Estado de México', 'Guadalajara', 'Monterrey'];
+  // Variable para almacenar el archivo de la imagen
+  File? _ineImage;
+
+  // Instancia del ImagePicker
+  final ImagePicker _picker = ImagePicker();
+
+  // Método para tomar la fotografía
+  Future<void> _takePhoto() async {
+    final XFile? pickedFile = await _picker.pickImage(source: ImageSource.camera);
+
+    if (pickedFile != null) {
+      setState(() {
+        _ineImage = File(pickedFile.path);
+      });
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Agregar Información'),
-      ),
+      appBar: AppBar(title: const Text('Subir Documentos')),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(16.0),
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            // Campo 'Ubicación'
-            _buildDropdownField(context, 'Ubicación'),
-            const SizedBox(height: 16),
-                        
-            // Campo de carga de INE
-            _buildDocumentUploadField(context, 'INE', 'Subir'),
-            const SizedBox(height: 16),
-            
-            // Campo de carga de Comprobante de domicilio
-            _buildDocumentUploadField(context, 'Comprobante de domicilio', 'Subir'),
-            const SizedBox(height: 16),
-
-            // Campo de carga de RFC
-            _buildDocumentUploadField(context, 'RFC', 'Subir'),
+            Text(
+              '¡Hola, ${widget.name} ${widget.lastName}!',
+              style: Theme.of(context).textTheme.headlineSmall,
+            ),
+            Text('Tu rol seleccionado es: ${widget.userRole.name}'),
+            const SizedBox(height: 20),
+            _buildDocumentUploadField(context, 'INE o Credencial escolar', 'Subir'),
             const SizedBox(height: 32),
-            
-            // Botón 'Continuar'
+            Text('Sube tu Documento para verificar que eres una persona real', textAlign: TextAlign.center),
+            const SizedBox(height: 20),
             SizedBox(
               width: double.infinity,
               height: 50,
               child: ElevatedButton(
                 onPressed: () {
-                 Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => const HomeScreen()),
-                );
+                  Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(builder: (context) => const HomePage()),
+                  );
                 },
-                child: const Text('Continuar', style: TextStyle(fontSize: 18)),
+                child: const Text('Finalizar Registro', style: TextStyle(fontSize: 18)),
               ),
             ),
           ],
@@ -58,35 +79,6 @@ class _DocumentUploadScreenState extends State<DocumentUploadScreen> {
     );
   }
 
-  Widget _buildDropdownField(BuildContext context, String label) {
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 16),
-      decoration: BoxDecoration(
-        border: Border.all(color: Colors.grey),
-        borderRadius: BorderRadius.circular(8),
-      ),
-      child: DropdownButtonHideUnderline(
-        child: DropdownButton<String>(
-          isExpanded: true,
-          hint: Text(label),
-          value: _selectedLocation, // Usa el valor de la variable de estado
-          items: _locations.map((String location) {
-            return DropdownMenuItem<String>(
-              value: location,
-              child: Text(location),
-            );
-          }).toList(),
-          onChanged: (String? newValue) {
-            // Actualiza el estado cuando se selecciona un nuevo valor
-            setState(() {
-              _selectedLocation = newValue;
-            });
-          },
-        ),
-      ),
-    );
-  }
-  
   Widget _buildDocumentUploadField(BuildContext context, String title, String buttonText) {
     return Container(
       padding: const EdgeInsets.all(16),
@@ -94,16 +86,24 @@ class _DocumentUploadScreenState extends State<DocumentUploadScreen> {
         border: Border.all(color: Colors.grey[300]!, width: 1),
         borderRadius: BorderRadius.circular(8),
       ),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      child: Column(
         children: [
-          Text(title, style: Theme.of(context).textTheme.titleMedium),
-          TextButton(
-            onPressed: () {
-              // Lógica para seleccionar archivo
-            },
-            child: Text(buttonText),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(title, style: Theme.of(context).textTheme.titleMedium),
+              TextButton(
+                onPressed: _takePhoto, // Llama a la función para tomar la foto
+                child: Text(buttonText),
+              ),
+            ],
           ),
+          // Muestra la vista previa de la imagen si se ha tomado una
+          if (_ineImage != null)
+            Padding(
+              padding: const EdgeInsets.only(top: 10.0),
+              child: Image.file(_ineImage!),
+            ),
         ],
       ),
     );
