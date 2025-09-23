@@ -20,7 +20,7 @@ class _SendMoneyScreenState extends State<SendMoneyScreen> {
   // Receiver dinámico
   String? _receiverWalletAddress;
   final List<String> _walletAddresses = [
-    'https://ilp.interledger-test.dev/8f22ad51',
+    'https://ilp.interledger-test.dev/daniel',
   ];
 
   // Amount
@@ -203,6 +203,7 @@ class _SendMoneyScreenState extends State<SendMoneyScreen> {
                               await transactions.completedPlay();
                               Navigator.pop(context);
                               Navigator.pop(context);
+
                             },
                             child: const Text("Continue"),
                           ),

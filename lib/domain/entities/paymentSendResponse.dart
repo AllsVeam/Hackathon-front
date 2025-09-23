@@ -19,25 +19,23 @@ class PaymentsendResponse {
 
   Map<String, dynamic> toMap() {
     return {
-      'success': success,
-      'redirectUrl': redirectUrl,
-      'continueAccessToken': continueAccessToken,
       'continueUri': continueUri,
+      'accessToken': continueAccessToken,
       'quoteId': quoteId,
       'sendingWalletAddressId': sendingWalletAddressId,
       'sendingWalletResourceServer': sendingWalletResourceServer,
     };
   }
 
-  factory PaymentsendResponse.fromMap(Map<String, dynamic> map) {
+ factory PaymentsendResponse.fromMap(Map<String, dynamic> map) {
     return PaymentsendResponse(
-      success: map['success'] ?? false,
-      redirectUrl: map['redirectUrl'] ?? '',
-      continueAccessToken: map['continueAccessToken'] ?? '',
-      continueUri: map['continueUri'] ?? '',
-      quoteId: map['quoteId'] ?? '',
-      sendingWalletAddressId: map['sendingWalletAddressId'] ?? '',
-      sendingWalletResourceServer: map['sendingWalletResourceServer'] ?? '',
+      success: map['success'] as bool? ?? false,
+      redirectUrl: map['redirectUrl'] as String? ?? '',
+      continueAccessToken: map['continueAccessToken'] as String? ?? '',
+      continueUri: map['continueUri'] as String? ?? '',
+      quoteId: map['quoteId'] as String? ?? '',
+      sendingWalletAddressId: map['sendingWalletAddressId'] as String? ?? '',
+      sendingWalletResourceServer: map['sendingWalletResourceServer'] as String? ?? '',
     );
   }
 
@@ -56,13 +54,12 @@ class PaymentsendResponse {
       continueAccessToken: continueAccessToken ?? this.continueAccessToken,
       continueUri: continueUri ?? this.continueUri,
       quoteId: quoteId ?? this.quoteId,
-      sendingWalletAddressId:
-          sendingWalletAddressId ?? this.sendingWalletAddressId,
-      sendingWalletResourceServer:
-          sendingWalletResourceServer ?? this.sendingWalletResourceServer,
+      sendingWalletAddressId: sendingWalletAddressId ?? this.sendingWalletAddressId,
+      sendingWalletResourceServer: sendingWalletResourceServer ?? this.sendingWalletResourceServer,
     );
   }
 
+  // Método para obtener una representación en cadena de la instancia
   @override
   String toString() {
     return 'PaymentsendResponse(success: $success, redirectUrl: $redirectUrl, continueAccessToken: $continueAccessToken, continueUri: $continueUri, quoteId: $quoteId, sendingWalletAddressId: $sendingWalletAddressId, sendingWalletResourceServer: $sendingWalletResourceServer)';

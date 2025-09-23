@@ -138,7 +138,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get carrouseltitle1 => 'You need to have a wallet';
 
   @override
-  String get carrouseltitle2 => 'Bank-Level Security';
+  String get carrouseltitle2 => 'Congratulations, you now have a wallet.';
 
   @override
   String get carrouseltitle3 => 'Easy & Convenient';
@@ -147,7 +147,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get carrouselsubtitle1 => 'Create your wallet at the following URL';
 
   @override
-  String get carrouselsubtitle2 => 'Your money and data are protected with military-grade encryption.';
+  String get carrouselsubtitle2 => 'Now you can send money safely with just AddressUrl.';
 
   @override
   String get carrouselsubtitle3 => 'Make payments, pay bills, and transfer money with just a few taps.';

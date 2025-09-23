@@ -138,7 +138,7 @@ class AppLocalizationsEs extends AppLocalizations {
   String get carrouseltitle1 => 'Necesitas contar con billetera';
 
   @override
-  String get carrouseltitle2 => 'Seguridad a nivel bancario';
+  String get carrouseltitle2 => 'Felicidades ahora tienes una billetera';
 
   @override
   String get carrouseltitle3 => 'Fácil y conveniente';
@@ -147,7 +147,7 @@ class AppLocalizationsEs extends AppLocalizations {
   String get carrouselsubtitle1 => 'Crea tu billetera en la siguiente URL.';
 
   @override
-  String get carrouselsubtitle2 => 'Tu dinero y tus datos están protegidos con cifrado de nivel militar.';
+  String get carrouselsubtitle2 => 'Ahora solo con AddressUrl podras enviar dinero de forma segura';
 
   @override
   String get carrouselsubtitle3 => 'Realiza pagos, paga facturas y transfiere dinero con solo unos toques.';

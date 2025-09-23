@@ -356,7 +356,7 @@ abstract class AppLocalizations {
   /// No description provided for @carrouseltitle2.
   ///
   /// In en, this message translates to:
-  /// **'Bank-Level Security'**
+  /// **'Congratulations, you now have a wallet.'**
   String get carrouseltitle2;
 
   /// No description provided for @carrouseltitle3.
@@ -374,7 +374,7 @@ abstract class AppLocalizations {
   /// No description provided for @carrouselsubtitle2.
   ///
   /// In en, this message translates to:
-  /// **'Your money and data are protected with military-grade encryption.'**
+  /// **'Now you can send money safely with just AddressUrl.'**
   String get carrouselsubtitle2;
 
   /// No description provided for @carrouselsubtitle3.

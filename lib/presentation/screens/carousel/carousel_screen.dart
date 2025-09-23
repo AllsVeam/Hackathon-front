@@ -90,30 +90,6 @@ class _CarouselScreenState extends State<CarouselScreen> {
           ),
         ),
       },
-      {
-        'icon': Icons.phone_iphone,
-        'title': loc.carrouseltitle3,
-        'subtitle': Text(
-          loc.carrouselsubtitle3,
-          textAlign: TextAlign.center,
-          style: TextStyle(
-            fontSize: MediaQuery.of(context).size.height * 0.018,
-            color: Colors.grey[600],
-          ),
-        ),
-      },
-      {
-        'icon': Icons.phone_outlined,
-        'title': "hola mundo",
-        'subtitle': Text(
-          "hols hols",
-          textAlign: TextAlign.center,
-          style: TextStyle(
-            fontSize: MediaQuery.of(context).size.height * 0.018,
-            color: Colors.grey[600],
-          ),
-        ),
-      },
     ];
 
     return Scaffold(
