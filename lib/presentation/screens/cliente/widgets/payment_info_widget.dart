@@ -6,6 +6,8 @@ class PaymentInfoWidget extends StatefulWidget {
   final String time;
   final String balance;
   final bool isCurrent;
+  final String? userRole;
+  final String status; 
 
   const PaymentInfoWidget({
     super.key,
@@ -13,6 +15,8 @@ class PaymentInfoWidget extends StatefulWidget {
     required this.time,
     required this.balance,
     required this.isCurrent,
+    this.userRole,
+    required this.status, 
   });
 
   @override
@@ -45,6 +49,14 @@ class _PaymentInfoWidgetState extends State<PaymentInfoWidget> {
 
   @override
   Widget build(BuildContext context) {
+    String paymentStatus;
+    
+    if (widget.status == 'Publicado' || widget.status == 'Revisión') {
+      paymentStatus = 'Sin estatus';
+    } else {
+      paymentStatus = widget.isCurrent ? 'Al corriente' : 'Vencido';
+    }
+
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16.0),
       child: Column(
@@ -132,28 +144,30 @@ class _PaymentInfoWidgetState extends State<PaymentInfoWidget> {
                     const Text('Estatus', style: TextStyle(fontWeight: FontWeight.bold)),
                     const SizedBox(height: 4),
                     Text(
-                      widget.isCurrent ? 'Al corriente' : 'Vencido',
+                      paymentStatus, 
                       style: TextStyle(
-                        color: widget.isCurrent ? Colors.green : Colors.red,
+                        color: paymentStatus == 'Al corriente' ? Colors.green : Colors.red,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
                   ],
                 ),
               ),
-              ElevatedButton(
-                onPressed: () {
-                  // Lógica para realizar el pago
-                },
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.lightGreen[400],
-                  foregroundColor: Colors.white,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(8),
+              // Muestra el botón de "Pagar" solo si el rol es "arrendatario"
+              if (widget.userRole == 'arrendatario')
+                ElevatedButton(
+                  onPressed: () {
+                    // Lógica para realizar el pago
+                  },
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.lightGreen[400],
+                    foregroundColor: Colors.white,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(8),
+                    ),
                   ),
+                  child: const Text('Pagar'),
                 ),
-                child: const Text('Pagar'),
-              ),
             ],
           ),
         ],

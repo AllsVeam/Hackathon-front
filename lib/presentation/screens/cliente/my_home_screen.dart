@@ -10,13 +10,14 @@ class MyHomePageScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     // Datos de ejemplo
     final List<String> imageUrls = [
-      'assets/images/property_1.jpg', // Usa las imágenes que declaraste en pubspec.yaml
+      'assets/images/property_1.jpg', 
     ];
     const String sellerName = 'Alfonso Diaz';
     const String modality = 'Venta';
     const String time = '3 años';
     const String balance = '\$90,000';
-    const bool isCurrent = true; // Cambia a false para ver el estado 'Vencido'
+    const bool isCurrent = true; 
+    const String status = 'Vendido'; 
 
     return Scaffold(
       appBar: AppBar(
@@ -40,6 +41,7 @@ class MyHomePageScreen extends StatelessWidget {
               time: time,
               balance: balance,
               isCurrent: isCurrent,
+              status: status,
             ),
           ],
         ),

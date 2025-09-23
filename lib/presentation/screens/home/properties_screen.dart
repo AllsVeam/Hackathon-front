@@ -56,6 +56,8 @@ class PropertiesScreen extends StatelessWidget {
             ),
 
             const SizedBox(height: 20),
+
+            const MyPropertiesButtonWidget(),
             
             const SizedBox(height: 20),
           ],

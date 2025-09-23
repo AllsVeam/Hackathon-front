@@ -83,9 +83,8 @@ class _PublishPropertyScreenState extends State<PublishPropertyScreen> {
     return const Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        // Reutilizamos el widget de ubicación
         PropertyLocationWidget(address: 'Av. Jardines Tepeyac 17'),
-        // Aquí podrías agregar lógica para seleccionar la ubicación en un mapa real
+        // proximo: lógica para seleccionar la ubicación en un mapa real
       ],
     );
   }
