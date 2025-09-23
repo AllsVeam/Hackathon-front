@@ -1,5 +1,6 @@
 import 'package:alquiler_app/presentation/screens/home/widgets/property_card_widget.dart';
 import 'package:alquiler_app/presentation/screens/home/widgets/search_bar_widget.dart';
+import 'package:alquiler_app/presentation/screens/vendedor/widgets/my_properties_button_widget.dart';
 import 'package:flutter/material.dart';
 
 class PropertiesScreen extends StatelessWidget {
